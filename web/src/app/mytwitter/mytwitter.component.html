@@ -1,0 +1,264 @@
+<div class="frame-padd col-md-12">
+
+  <br>
+
+  <div class="card">
+
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#hometimeline" aria-controls="usertimeline" role="tab" data-toggle="tab">
+          <b>Home Timeline</b>
+        </a>
+      </li>
+      <li role="presentation">
+        <a href="#usertimeline" aria-controls="usertimeline" role="tab" data-toggle="tab">
+          <b>User Timeline</b>
+        </a>
+      </li>
+      <li role="presentation" class="">
+        <a href="#mentions" aria-controls="mentions" role="tab" data-toggle="tab">
+          <b>Mentions</b>
+        </a>
+      </li>
+      <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <b>Previous Tweets</b>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#preveousMentions" aria-controls="preveousMentions" role="tab" data-toggle="tab">
+              <b>Mentions</b>
+            </a>
+          </li>
+          <li>
+            <a href="#non-mention" aria-controls="non-mention" role="tab" data-toggle="tab">
+              <b>Non Mention</b>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <b>Peoples</b>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#folllowing" aria-controls="folllowing" role="tab" data-toggle="tab">
+              <b>Following List</b>
+            </a>
+          </li>
+          <li>
+            <a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">
+              <b>Followers List</b>
+            </a>
+          </li>
+        </ul>
+
+      </li>
+
+      <li class="inner-addon right-addon search-icon">
+        <i class="glyphicon glyphicon-search " style="right:-246px;"></i>
+        <input type="text" placeholder="Search" [(ngModel)]="term" class="form-control search-box" />
+      </li>
+    </ul>
+    <!-- Tab panes -->
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="hometimeline">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default" *ngFor="let item of homeDeatils | filter:term">
+              <div class="panel-body">
+                <div>
+                  <a href="{{item.ht_user_screen_name_url}}">
+                    <img style="width:50px;height:50px;border-radius:60%" src={{item.ht_user_profile_image_url}}>
+                  </a>
+                  <b>{{item.ht_user_name}}</b>
+                  <a href="{{item.ht_user_screen_name_url}}">@{{item.ht_user_screen_name}}</a>&nbsp;{{item.ht_created_at}}
+                  <p>Massage : {{item.ht_text}}</p>
+                  <a href="{{item.ht_url}}" *ngIf="!(item.ht_url=='unavailable')">Reply : {{item.ht_url}}</a>
+                </div>
+                <div class="col-md-6">
+                  <div *ngIf="!(item.ht_media_url=='unavailable')">
+                    <a href="{{item.ht_url}}">
+                      <img style="width:50%;border-radius:0%" src={{item.ht_media_url}}>
+                    </a>
+                  </div>
+                  <div *ngIf="!(item.ht_extended_entities_url=='unavailable')">
+                    <video width="320" height="240" controls>
+                      <source src="{{item.ht_extended_entities_url}}" type="video/mp4">
+                      <source src="{{item.ht_extended_entities_url}}" type="video/ogg">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="usertimeline">
+        <div class="panel-group">
+          <div class="row">
+            <ng4-twitter-timeline [dataSrc]="{sourceType: 'profile',screenName: 'BrentonAGM'}" [opts]="{tweetLimit: 12}"></ng4-twitter-timeline>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="folllowing">
+        <h4 style="margin-top: 0px;margin-bottom: 0px;top: -20px;position: relative;">Following</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default" *ngFor="let item of followings|filter:term">
+              <div class="panel-body">
+                <div>
+                  <a href="{{item.following_screen_name_url}}">
+                    <img style="width:50px;height:50px;border-radius:60%" src={{item.Image}}>
+                  </a>
+                  <b>{{item.name}}</b>
+                  <a href="{{item.following_screen_name_url}}">@{{item.following_screen_name}}</a>&nbsp;{{item.created_at}}
+                  <p>Description : {{item.description}}</p>
+                  <p>Freinds count : {{item.freind_count}} &nbsp;&nbsp;Followers count : {{item.followers_count}}&nbsp;&nbsp;Faverities
+                    count : {{item.favourites_count}}&nbsp;&nbsp;Location : {{item.follower_location}}</p>
+                  <a href="{{item.following_url}}" *ngIf="!(item.following_url=='unavailable')">Views : {{item.following_url}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="mentions">
+          <h4 style="margin-top: 0px;margin-bottom: 0px;top: -20px;position: relative;">Mentions</h4>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default" *ngFor="let item of details|filter:term">
+                <div class="panel-body">
+                  <div>
+                    <a href="{{item.url}}">
+                      <img style="width:50px;height:50px;border-radius:60%" src={{item.imageUrl}}>
+                    </a>
+                    <b>{{item.name}}</b>
+                    <a href="{{item.url}}">&nbsp;{{item.screen_name}}</a>
+                    {{item.created_at}}
+                    <p>Description: {{item.description}}</p>
+                    &nbsp;Location : {{item.location}}
+                    &nbsp;Followers count : {{item.followers_count}}
+                    <div *ngIf="!(item.replyurl=='unavailable')">
+                      <a href="{{item.replyurl}}">Reply To : {{item.replyurl}}</a>
+                    </div>
+                    <div *ngIf="(item.replyurl=='unavailable')">
+                      <p>Reply To : unavailable</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div *ngIf="!(item.postImage=='unavailable')">
+                      <a href="{{item.replyurl}}">
+                        <img style="width:50%;border-radius:0%" src={{item.postImage}}>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="preveousMentions">
+        <h4 style="margin-top: 0px;margin-bottom: 0px;top: -20px;position: relative;">Previous Mention Tweets</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default" *ngFor="let item of previousMentions|filter:term">
+              <div class="panel-body">
+                <div>
+                  <a href="{{item.url}}">
+                    <img style="width:50px;height:50px;border-radius:60%" src={{item.imageurl}}>
+                  </a>
+                  <b>{{item.name}}</b>
+                  <a href="{{item.url}}">&nbsp;{{item.url}}</a>
+                  {{item.created_at}}
+                  <div *ngIf="!(item.replytourl=='unavailable')">
+                    <a href="{{item.replytourl}}">Reply To : {{item.replytourl}}</a>
+                  </div>
+                  <div *ngIf="(item.replytourl=='unavailable')">
+                    <p>Reply To : unavailable</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div *ngIf="!(item.postimage=='unavailable')">
+                    <a href="{{item.replytourl}}">
+                      <img style="width:50%;border-radius:0%" src={{item.postimage}}>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="non-mention">
+        <h4 style="margin-top: 0px;margin-bottom: 0px;top: -20px;position: relative;">Non Mention Tweets</h4>
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="panel panel-default" *ngFor="let item of homeDbData|filter:term|filter:term">
+
+              <div class="panel-body">
+                <div>
+                  <!-- <a href="{{item.ht_user_screen_name_url}}"> -->
+                  <a href="{{item.ht_user_screen_name}}">
+                    <img style="width:50px;height:50px;border-radius:60%" src={{item.ht_user_profile_image_url}}>
+                  </a>
+                  <!-- </a> -->
+                  <b>{{item.ht_user_screen_name_display}}</b>
+                  <a href="{{item.ht_user_screen_name}}">&nbsp;{{item.ht_user_screen_name}}</a>
+                  {{item.ht_post_created_at}}
+                  <div *ngIf="!(item.ht_url=='unavailable')">
+                    <a href="{{item.ht_url}}">Reply To : {{item.ht_url}}</a>
+                  </div>
+                  <div *ngIf="(item.ht_url=='unavailable')">
+                    <p>Reply To : unavailable</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div *ngIf="!(item.ht_media_url=='unavailable')">
+                    <a href="{{item.ht_url}}">
+                      <img style="width:50%;border-radius:0%" src={{item.ht_media_url}}>
+                    </a>
+                  </div>
+                  <div *ngIf="!(item.ht_extended_entities_url=='unavailable')">
+                    <video width="320" height="240" controls>
+                      <source src="{{item.ht_extended_entities_url}}" type="video/mp4">
+                      <source src="{{item.ht_extended_entities_url}}" type="video/ogg">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="followers">
+        <h4 style="margin-top: 0px;margin-bottom: 0px;top: -20px;position: relative;">Followers</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default" *ngFor="let item of followerArray|filter:term">
+              <div class="panel-body">
+                <div>
+                  <a href="{{item.screen_name}}">
+                    <img style="width:50px;height:50px;border-radius:60%" src={{item.Image}}>
+                  </a>
+                  <b>{{item.name}}</b>
+                  <a href="{{item.screen_name}}">&nbsp;{{item.dispaly_screen_name}}</a>
+                  {{item.created_at}}
+                  <p>Description : {{item.description}}</p>
+                  <p>Followers count : {{item.followers_count}}&nbsp;&nbsp;Location : {{item.follower_location}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

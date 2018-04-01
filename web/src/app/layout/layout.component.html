@@ -1,0 +1,56 @@
+<div id="flipkart-navbar">
+  <div class="container">
+    <div class="row row1">
+        
+    </div>
+    <div class="row row2">
+      <div class="col-sm-1">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/']">
+          <img alt="profile" style="width:50px;height:50px;border-radius:65%;margin-left:20px" src="https://twitter.com/BrentonAGM/profile_image?size=normal"
+            class="pointer">
+        </a>
+      </div>
+      <div class="col-sm-1">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/alltwite']">
+          <img alt="twittes"  style="width:50px;height:50px;border-radius:65%;margin-left:-17px" src="./assets/images/tweets.png" class="pointer">
+        </a>
+       </div>
+      <div class="col-sm-1">
+        <!-- <a class="nav-link" routerLinkActive="active" [routerLink]="['/followers']">
+          <h4 class="pointer" style="width:50px;height:50px;border-radius:65%;margin-left:-53px;color:white">
+            <b>
+              <i>followers</i>
+            </b>
+          </h4>
+        </a> -->
+      </div>
+      <div class="flipkart-navbar-search smallsearch col-sm-6 col-xs-11">
+        <div class="row">
+          <input class="flipkart-navbar-input col-xs-11" placeholder="Search" id="hashtags" type="text" (keyup.enter)="searchcall()"
+            [(ngModel)]="searchquery" [ngModelOptions]="{standalone: true}">
+          <button class="flipkart-navbar-button col-xs-1" (click)="searchcall()">
+            <svg width="15px" height="15px">
+              <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+            </svg>
+          </button>
+         
+        </div>
+      </div>
+      <div class="col-sm-1">
+          
+            <img alt="refresh"  style="width:50px;height:50px;border-radius:65%;margin-left:5px" src="./assets/images/refresh.png" class="pointer"(click)="refresh()">
+          
+         </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Main content -->
+<main class="main">
+  <div class="container-fluid" style="background-color:#afcddc;min-height: 1000px">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- /.conainer-fluid -->
+</main>

@@ -1,0 +1,82 @@
+
+<div class="sk-circle" *ngIf='(details.length<1)'>
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+ 
+    
+<div class="frame-padd col-md-12 "  *ngIf='(details.length>0)'>
+ <br>  
+ 
+ <h4 style="color:white;padding:0px">Random Tweets</h4>  
+
+    <div class="panel-group">
+      
+          <div class="row">
+            
+              <div *ngFor="let item of details;let i=index" class="col s12 m7">
+                  <form class="col s4">
+                  <div class="panel panel-default">
+                    
+                    <div class="panel-body">
+                  <div >
+                    <img style="width:50px;height:50px;border-radius:60%" src={{item.imageUrl}}>
+                  </div>
+                  <div>
+                   <div><h4><b>{{item.name}}</b></h4> </div>
+                   <div>
+                      <a href="{{item.screen_name}}">View Account : {{item.screen_name}}</a>
+                    </div>
+                    <div>
+                      <p>Massage : {{item.text}}</p>
+                    </div>
+                    <div>
+                      <p>Created_at : {{item.created_at}}</p>
+                    </div>
+                    <div *ngIf="!(item.url=='unavailable')">
+                        <a href="{{item.url}}">Reply To : {{item.url}}</a>
+                      </div>
+                      <div *ngIf="(item.url=='unavailable')">
+                          <p>Reply To : unavailable</p>
+                        </div>
+                  </div>
+                  <div *ngIf="!(item.postImage=='unavailable')">
+                      <a href="{{item.url}}"><img style="width:100%;border-radius:0%" src={{item.postImage}}></a>
+                    </div>
+                </div>
+              </div>
+              <br>
+            </form>
+              </div>
+            
+          </div>
+
+          
+        </div>
+      
+  
+  
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
